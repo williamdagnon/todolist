@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <title>To do list</title>
+        <link rel="stylesheet" href="styles.css">
+        
+    </head>
+    <body>
+        <h1>My To-DoList</h1>
+        <div class="container">
+            <div class="champs">
+                <input type="text" id="taskInput" placeholder="Ajouter une tâche">
+                <button id="addTask"><ion-icon name="add-circle-outline"></ion-icon></button>
+            </div>
+            <ul id="taskList"></ul>
+        </div>
+        <script>
+            
+            document.getElementById('addTask').addEventListener('click', 
+
+            function addTask(){
+                
+                var taskList = document.getElementById('taskList')
+                var taskInput = document.getElementById('taskInput')
+                var taskText = taskInput.value
+                if(taskText=== ''){
+                    alert('Veuillez ajouter une tâche s\'il vous plaît')
+                }else{
+                    var li = document.createElement('li')
+                    li.innerHTML = taskText
+                    
+                    var editButton = document.createElement('button')
+                    editButton.innerHTML='<ion-icon name="pencil-outline" class="modify"></ion-icon>'
+                    editButton.addEventListener('click',function(){
+                            var taskTextElement = li.firstChild;
+                            var taskText = taskTextElement.textContent;
+                            var newTaskText = prompt('Modifier la tâche:' + taskText)
+                            if(newTaskText===null || newTaskText===''){
+                                return;
+                            }else{
+                                taskTextElement.textContent = newTaskText
+
+                            }
+                            
+                        
+                    })
+
+                    var deleteButton = document.createElement('button')
+                    deleteButton.innerHTML = '<ion-icon name="trash-outline" class="delete"></ion-icon>'
+                    deleteButton.addEventListener('click',function(){
+                        li.style.display='none'
+                    })
+                    li.appendChild(editButton)
+                    li.appendChild(deleteButton)
+
+                    taskList.appendChild(li)
+
+                    taskInput.value= ""
+
+                }
+
+                
+
+        }) 
+
+        
+
+        </script>
+        
+        <script  type = "module"  src = "https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script> 
+        <script  nomodule  src = "https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+        
+    </body>
+</html>
